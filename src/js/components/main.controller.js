@@ -1,8 +1,8 @@
 import angular from 'angular';
 
 angular.module('flks').controller('main', [
-  '$scope', '$http',
-  function ($scope, $http) {
+  '$scope', '$http', '$timeout',
+  function ($scope, $http, $timeout) {
     $scope.search = {
       submit: function (tag, form) {
         this.status = {
@@ -10,6 +10,10 @@ angular.module('flks').controller('main', [
           found: false,
           failure: false
         };
+
+        this.tag = '';
+        $scope.lastSearchTag = tag;
+        form.$setPristine();
 
         $http({
           url: 'https://api.flickr.com/services/rest',
@@ -43,6 +47,8 @@ angular.module('flks').controller('main', [
               found: false,
               failure: true
             };
+
+            $timeout(() => { this.status.failure = false; }, 3000);
           });
       },
       status: {

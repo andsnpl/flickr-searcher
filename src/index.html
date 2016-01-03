@@ -15,10 +15,10 @@
         <div class="messagecenter">
           <div ng-messages="search.status" role="alert">
             <p class="info info-searching" ng-message="searching">
-              Searching flickr for images of {{ search.tag }}.
+              Searching flickr for images of {{ lastSearchTag }}.
             </p>
             <p class="info info-found" ng-message="found">
-              We found {{ results.length }} images of {{ search.tag }}.
+              We found {{ results.length }} images of {{ lastSearchTag }}.
             </p>
             <p class="error error-failure" ng-message="failure">
               The search failed for some reason.
@@ -35,7 +35,7 @@
     </section>
     <section class="results">
       <img ng-src="//farm{{ result.farm }}.staticflickr.com/{{ result.server }}/{{ result.id }}_{{ result.secret }}.jpg"
-           alt="{{ result | json }}"
+           alt="{{ result.title }}"
            class="result" ng-repeat="result in results">
     </section>
   </main>
