@@ -1,17 +1,22 @@
 {
   "name": "flickr-searcher",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "",
-  "main": "index.js",
+  "main": "src/js/index.js",
   "directories": {
     "test": "test"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "open https://localhost:8080/test",
+    "clean": "rm -rf build/",
+    "_build": "NODE_ENV=production webpack -p --optimize-dedupe --progress",
+    "build": "npm run clean && npm run _build",
+    "start": "NODE_ENV=development webpack-dev-server --inline",
+    "archive": "npm prune --production"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Paul Anderson",
+  "license": "MIT",
   "devDependencies": {
     "angular": "^1.4.8",
     "angular-animate": "^1.4.8",
@@ -38,5 +43,14 @@
     "webpack-dev-middleware": "^1.4.0",
     "webpack-dev-server": "^1.14.0",
     "webpack-hot-middleware": "^2.6.0"
-  }
+  },
+  "dependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/b-paul/flickr-searcher.git"
+  },
+  "bugs": {
+    "url": "https://github.com/b-paul/flickr-searcher/issues"
+  },
+  "homepage": "https://github.com/b-paul/flickr-searcher#readme"
 }

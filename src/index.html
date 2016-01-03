@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Flickr Searcher</title>
+  <style type="text/css">.ng-cloak { display: none; }</style>
+</head>
+<body>
+  <main class="app ng-cloak" ng-app="flks" ng-controller="main">
+    <section class="search">
+      <form novalidate class="searchform" name="searchform"
+            ng-submit="search.submit(search.tag, searchform)">
+        <input required type="text" name="tag" ng-model="search.tag">
+        <input type="submit">
+        <div class="messagecenter">
+          <div ng-messages="search.status" role="alert">
+            <p class="info info-searching" ng-message="searching">
+              Searching flickr for images of {{ search.tag }}.
+            </p>
+            <p class="error error-failure" ng-message="failure">
+              The search failed for some reason.
+            </p>
+          </div>
+          <div ng-if="searchform.$submitted"
+               ng-messages="searchform.$error" role="alert">
+            <p class="error error-required" ng-message="required">
+              You need to specify a tag to search.
+            </p>
+          </div>
+        </div>
+      </form>
+    </section>
+    <section class="results">
+      <img ng-src="//farm{{ result.farm }}.staticflickr.com/{{ result.server }}/{{ result.id }}_{{ result.secret }}.jpg"
+           alt="{{ result.description }}"
+           class="result" ng-repeat="result in results">
+    </section>
+  </main>
+</body>
+</html>
