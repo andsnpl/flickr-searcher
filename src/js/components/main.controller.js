@@ -5,6 +5,12 @@ angular.module('flks').controller('main', [
   function ($scope, $http) {
     $scope.search = {
       submit: function (tag, form) {
+        this.status = {
+          searching: true,
+          found: false,
+          failure: false
+        };
+
         $http({
           url: 'https://api.flickr.com/services/rest',
           method: 'GET',
@@ -16,8 +22,27 @@ angular.module('flks').controller('main', [
             format: 'json',
             nojsoncallback: 1
           } })
-          .then(function (response) {
-            console.log(response.data);
+          .then((response) => {
+            if (response.status !== 200) {
+              let err = new Error('Response not OK');
+              err.response = response;
+              throw err;
+            }
+
+            this.status = {
+              searching: false,
+              found: true,
+              failure: false
+            };
+
+            $scope.results = response.data.photos.photo;
+          })
+          .catch((err) => {
+            this.status = {
+              searching: false,
+              found: false,
+              failure: true
+            };
           });
       },
       status: {

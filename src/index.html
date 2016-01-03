@@ -17,6 +17,9 @@
             <p class="info info-searching" ng-message="searching">
               Searching flickr for images of {{ search.tag }}.
             </p>
+            <p class="info info-found" ng-message="found">
+              We found {{ results.length }} images of {{ search.tag }}.
+            </p>
             <p class="error error-failure" ng-message="failure">
               The search failed for some reason.
             </p>
@@ -32,7 +35,7 @@
     </section>
     <section class="results">
       <img ng-src="//farm{{ result.farm }}.staticflickr.com/{{ result.server }}/{{ result.id }}_{{ result.secret }}.jpg"
-           alt="{{ result.description }}"
+           alt="{{ result | json }}"
            class="result" ng-repeat="result in results">
     </section>
   </main>

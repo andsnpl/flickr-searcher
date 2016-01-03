@@ -109,14 +109,6 @@ rules:
   ## require space before blocks, eg 'function () {'
   space-before-blocks: [2, "always"]
 
-  # ECMAScript 6
-  ## Suggest using 'const' wherever possible
-  prefer-const: 2
-
-  # Strict Mode
-  ## 'use strict' on top
-  strict: [2, "global"]
-
   # Variables
   ## disallow use of undefined variables (globals)
   no-undef: 2
