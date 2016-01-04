@@ -1,0 +1,139 @@
+body {
+  background-color: black;
+  font-family: sans-serif;
+  margin: 0;
+}
+
+input,
+button {
+  font-size: 1rem;
+  border-radius: .25rem;
+}
+
+input {
+  padding: .2rem;
+}
+
+button,
+input[type=button],
+input[type=submit], {
+  padding: .25rem;
+}
+
+button:active, button:focus,
+input[type=button]:active, input[type=button]:focus,
+input[type=submit]:active, input[type=submit]:focus {
+  outline: none;
+  text-decoration: underline;
+}
+
+.flks {
+  background-color: white;
+  margin: 0 auto;
+  padding: 3rem;
+  max-width: 50rem;
+  text-align: center;
+  min-height: 100vh;
+}
+
+.search {
+  height: 10rem;
+
+  .searchform {
+    display: inline-block;
+    text-align: left;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+
+.searchform {
+  padding: 0 4rem;
+}
+
+.messagecenter {
+  position: absolute;
+  top: 50%;
+  padding-top: 1rem;
+
+  .message {
+    display: inline-block;
+    text-align: left;
+  }
+}
+
+.error {
+  background-color: pink;
+}
+
+.info {
+  background-color: #e0e0e0;
+}
+
+.message {
+  padding: .5rem;
+}
+
+.message.ng-enter {
+  transform: scale3d(1, 0, 0);
+  transition: transform 0.05s linear;
+}
+
+.message.ng-enter.ng-enter-active {
+  transform: scale3d(1, 1, 1);
+}
+
+@mixin spinner {
+  &:before {
+    content: '';
+    display: block;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    border: .8rem solid transparent;
+    border-bottom-color: #999;
+    border-top-color: #999;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate3d(-50%, -100%, 0) rotate(0deg);
+    animation: spin 1.5s linear infinite;
+  }
+
+  @keyframes spin {
+    to {
+      transform: translate3d(-50%, -100%, 0) rotate(360deg);
+    }
+  }
+}
+
+.results {
+  border-radius: 0.5rem;
+  background-color: #d5d5d0  ;
+  transition: all .1s linear;
+  column-count: 3;
+  column-gap: 0.2rem;
+  column-fill: auto;
+}
+
+.result {
+  transform: scale3d(0, 0, 0);
+  width: 100%;
+  transition: transform .1s ease-in;
+}
+
+.results.searching {
+  min-height: 4rem;
+  padding: 1.5rem;
+  @include spinner;
+}
+
+.results.found {
+  min-height: 20rem;
+  padding: 1.5rem;
+
+  .result {
+    transform: scale3d(1, 1, 1);
+  }
+}

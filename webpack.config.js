@@ -30,7 +30,7 @@ module.exports = exports = {
           }
         } },
       { test: /\.s[ac]ss$/,
-        loaders: ['css', 'style', 'postcss'] }
+        loaders: ['style', 'css', 'postcss'] }
     ]
   },
   postcss: function () {
