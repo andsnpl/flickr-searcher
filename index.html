@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Flickr Searcher</title>
+  <style type="text/css">.ng-cloak { display: none; }</style>
+</head>
+<body>
+  <main class="flks ng-cloak" ng-app="flks" ng-controller="main">
+    <header class="topheader">
+      <h1>Flickr Searcher</h1>
+    </header>
+    <section class="search">
+      <form novalidate autocomplete="off" class="searchform" name="searchform"
+            ng-submit="search.submit(search.tag, searchform)">
+        <input autofocus required type="text" name="tag" ng-model="search.tag">
+        <input type="submit">
+        <div class="messagecenter">
+          <div ng-messages="search.status" role="alert">
+            <p class="info message info-searching" ng-message="searching">
+              Searching flickr for images of {{ lastSearchTag }}.
+            </p>
+            <p class="info message info-found" ng-message="found">
+              We found {{ results.length }} images of {{ lastSearchTag }}.
+            </p>
+            <p class="error message error-failure" ng-message="failure">
+              The search failed for some reason.
+            </p>
+          </div>
+          <div ng-messages="searchform.$error" role="alert"
+               ng-if="searchform.$submitted">
+            <p class="error message error-required" ng-message="required">
+              You need to specify a tag to search.
+            </p>
+          </div>
+        </div>
+      </form>
+    </section>
+    <section class="results" ng-class="search.status"
+             ng-show="search.status.searching || search.status.found">
+      <img ng-src="{{ result.src }}"
+           alt="{{ result.title }}"
+           class="result" ng-repeat="result in results">
+    </section>
+  </main>
+<script src="js/index.min.js"></script></body>
+</html>
